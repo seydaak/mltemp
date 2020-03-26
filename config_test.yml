@@ -1,0 +1,5 @@
+data:
+  folder_path: "C:/Users/02485000/Desktop/Projects/DS_Template/"
+  file_name: "dataset.csv"
+  save_name: "saved_dataset.csv"
+  type: "csv"
