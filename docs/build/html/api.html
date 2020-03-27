@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>API Documentation &#8212; Arçelik Demand Forecasting 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/project_name.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Demand Forecasting documentation" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Demand Forecasting documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arçelik Demand Forecasting 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-documentation">
+<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This page covers the complete source code documentation of the modules for the project. The source code is
+divided into three main modules: <code class="docutils literal notranslate"><span class="pre">src.project_name.pipeline</span></code>, <code class="docutils literal notranslate"><span class="pre">src.project_name.preparation</span></code> and <code class="docutils literal notranslate"><span class="pre">src.project_name.training</span></code>.</p>
+<div class="section" id="src-project-name-pipeline">
+<h2>src.project_name.pipeline<a class="headerlink" href="#src-project-name-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>The pipeline package contains the basic constructs to build the preparation, training and scoring pipeline for the project.</p>
+<p>At its core there is the the <code class="docutils literal notranslate"><span class="pre">src.project_name.pipeline.abstractpipelineobject</span></code> module. It provides the interface for the basic
+building block of the pipeline: the pipeline object. The pipeline object has a <code class="docutils literal notranslate"><span class="pre">transform</span></code> function that is called
+when it is registered in an implementation of the <code class="docutils literal notranslate"><span class="pre">src.project_name.pipeline.pipeline.Pipeline</span></code>. The pipeline is itself an
+implementation of the <code class="docutils literal notranslate"><span class="pre">src.project_name.pipeline.abstractpipelineobject.PipelineObject</span></code> and implements the <code class="docutils literal notranslate"><span class="pre">transform</span></code>
+functions. Through this a pipeline can contain other pipelines as objects, allowing for nested execution and more
+flexible structuring and modularization of the pipeline.</p>
+<span class="target" id="module-src.project_name.pipeline.abstractpipelineobject"></span><div class="section" id="src-project-name-pipeline-abstractpipelineobject">
+<h3>src.project_name.pipeline.abstractpipelineobject<a class="headerlink" href="#src-project-name-pipeline-abstractpipelineobject" title="Permalink to this headline">¶</a></h3>
+<p>This module provides the abstract implementation for the pipeline objects that make up the demand forecasting pipeline.</p>
+<dl class="class">
+<dt id="src.project_name.pipeline.abstractpipelineobject.PipelineObject">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.pipeline.abstractpipelineobject.</code><code class="sig-name descname">PipelineObject</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.pipeline.abstractpipelineobject.PipelineObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is the base implementation for Pipeline Objects. It provides the generic <code class="docutils literal notranslate"><span class="pre">transform</span></code> function that
+should be used in all implementations of PipelineObjects to chain the PipelineObjects into a Pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>config</strong> – the configuration object for the model run.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="src.project_name.pipeline.abstractpipelineobject.PipelineObject.transform">
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">data: pandas.core.frame.DataFrame</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#src.project_name.pipeline.abstractpipelineobject.PipelineObject.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>The transform function that is called by the pipeline to trigger the transformation functionality of this class.
+The functionality is implemented in the internal <code class="docutils literal notranslate"><span class="pre">__transform__</span></code> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – The dataframe that will be transformed by thie Pipeline Object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dataframe that has been transformed by this pipeline object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-src.project_name.pipeline.pipeline"></span><div class="section" id="src-project-name-pipeline-pipeline">
+<h3>src.project_name.pipeline.pipeline<a class="headerlink" href="#src-project-name-pipeline-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>This module provides the functionality to execute and manage a pipeline of pipelineojects that implement the
+<code class="docutils literal notranslate"><span class="pre">src.project_name.pipeline.abstractpipelineobject</span></code> class.</p>
+<dl class="class">
+<dt id="src.project_name.pipeline.pipeline.Pipeline">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.pipeline.pipeline.</code><code class="sig-name descname">Pipeline</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.pipeline.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>The class to manage the pipeline object. It provides the transform function that is called throughout the pipeline.</p>
+<dl class="method">
+<dt id="src.project_name.pipeline.pipeline.Pipeline.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">pipelineobject: src.project_name.pipeline.abstractpipelineobject.PipelineObject</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.project_name.pipeline.pipeline.Pipeline.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new src.project_name.pipeline.abstractpipelineobject.PipelineObject to the pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pipelineobject</strong> (<em>apo.PipelineObject</em>) – The PipelineObject that is added to the pipeline</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.project_name.pipeline.pipeline.Pipeline.get_pipeline">
+<code class="sig-name descname">get_pipeline</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#src.project_name.pipeline.pipeline.Pipeline.get_pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the current pipeline as a list <code class="docutils literal notranslate"><span class="pre">src.project_name.pipeline.abstractpipelineobject</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="src.project_name.pipeline.pipeline.Pipeline.set_pipeline">
+<code class="sig-name descname">set_pipeline</code><span class="sig-paren">(</span><em class="sig-param">pipelineobjects: list</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#src.project_name.pipeline.pipeline.Pipeline.set_pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the new pipeline with a list of pairs of name and <code class="docutils literal notranslate"><span class="pre">src.project_name.pipeline.abstractpipelineobject</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pipelineobjects</strong> (<em>list</em><em>(</em><em>apo.PipelineObject</em><em>)</em>) – a list of pairs of <code class="docutils literal notranslate"><span class="pre">src.project_name.pipeline.abstractpipelineobject</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="src-project-name-preparation">
+<h2>src.project_name.preparation<a class="headerlink" href="#src-project-name-preparation" title="Permalink to this headline">¶</a></h2>
+<p>This package comprises the data preparation pipeline. The data preparation pipeline is typically the first pipeline that
+is executed, even before generating features or training any model.</p>
+<p>The data preparation pipeline is managed in the <code class="docutils literal notranslate"><span class="pre">src.project_name.preparation.preparation</span></code> module. The class
+<code class="docutils literal notranslate"><span class="pre">src.project_name.preparation.preparation.Preparation</span></code> contains the implementation of the data preparation pipeline for the
+project.</p>
+<span class="target" id="module-src.project_name.preparation.dataloader"></span><div class="section" id="src-project-name-preparation-dataloader">
+<h3>src.project_name.preparation.dataloader<a class="headerlink" href="#src-project-name-preparation-dataloader" title="Permalink to this headline">¶</a></h3>
+<p>This module provides the functionality to read data from different source files or source systems.</p>
+<dl class="class">
+<dt id="src.project_name.preparation.dataloader.DataLoader">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.preparation.dataloader.</code><code class="sig-name descname">DataLoader</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.preparation.dataloader.DataLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and Save Data</p>
+<dl class="method">
+<dt id="src.project_name.preparation.dataloader.DataLoader.read_csv">
+<code class="sig-name descname">read_csv</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#src.project_name.preparation.dataloader.DataLoader.read_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function reads csv files
+:return: A dataframe has bas been read</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="src-project-name-training">
+<h2>src.project_name.training<a class="headerlink" href="#src-project-name-training" title="Permalink to this headline">¶</a></h2>
+<p>The training package contains all functionality to generate features, train and test time series and machine learning
+models.</p>
+<p>The main module for this pipeline is the <code class="docutils literal notranslate"><span class="pre">src.project_name.training.Training</span></code> module. It registers and executes all the modules
+that make up the training step of the project.</p>
+<span class="target" id="module-src.project_name.training.trainingpipe"></span><div class="section" id="src-project-name-training-trainingpipe">
+<h3>src.project_name.training.trainingpipe<a class="headerlink" href="#src-project-name-training-trainingpipe" title="Permalink to this headline">¶</a></h3>
+<p>This module implements the pipeline that manages and executes training operations.</p>
+<dl class="class">
+<dt id="src.project_name.training.trainingpipe.TrainingPipe">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.training.trainingpipe.</code><code class="sig-name descname">TrainingPipe</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.training.trainingpipe.TrainingPipe" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class implements the complete training pipeline.</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-src.project_name.training.addfive"></span><div class="section" id="src-project-name-training-addfive">
+<h3>src.project_name.training.addfive<a class="headerlink" href="#src-project-name-training-addfive" title="Permalink to this headline">¶</a></h3>
+<p>This module provides functionalities to add five</p>
+<dl class="class">
+<dt id="src.project_name.training.addfive.AddFive">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.training.addfive.</code><code class="sig-name descname">AddFive</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.training.addfive.AddFive" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class adds five to value</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-src.project_name.training.addten"></span><div class="section" id="src-project-name-training-addten">
+<h3>src.project_name.training.addten<a class="headerlink" href="#src-project-name-training-addten" title="Permalink to this headline">¶</a></h3>
+<p>This module provides functionalities to add ten</p>
+<dl class="class">
+<dt id="src.project_name.training.addten.AddTen">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.training.addten.</code><code class="sig-name descname">AddTen</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.training.addten.AddTen" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class adds ten to value</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="src-project-name-preprocess">
+<h2>src.project_name.preprocess<a class="headerlink" href="#src-project-name-preprocess" title="Permalink to this headline">¶</a></h2>
+<p>The preprocess package contains …</p>
+<span class="target" id="module-src.project_name.preprocess.preprocesspipe"></span><div class="section" id="src-project-name-preprocess-trainingpipe">
+<h3>src.project_name.preprocess.trainingpipe<a class="headerlink" href="#src-project-name-preprocess-trainingpipe" title="Permalink to this headline">¶</a></h3>
+<p>This module implements the pipeline that manages and executes preprocess operations.</p>
+<dl class="class">
+<dt id="src.project_name.preprocess.preprocesspipe.PreprocessPipe">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.preprocess.preprocesspipe.</code><code class="sig-name descname">PreprocessPipe</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.preprocess.preprocesspipe.PreprocessPipe" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class implements the complete preprocess pipeline.</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-src.project_name.preprocess.subtractfive"></span><div class="section" id="src-project-name-training-substractfive">
+<h3>src.project_name.training.substractfive<a class="headerlink" href="#src-project-name-training-substractfive" title="Permalink to this headline">¶</a></h3>
+<p>This module provides functionalities to preprocess five</p>
+<dl class="class">
+<dt id="src.project_name.preprocess.subtractfive.SubtractFive">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.preprocess.subtractfive.</code><code class="sig-name descname">SubtractFive</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.preprocess.subtractfive.SubtractFive" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class subtracts five to value</p>
+</dd></dl>
+
+</div>
+<span class="target" id="module-src.project_name.preprocess.subtractten"></span><div class="section" id="src-project-name-training-substractten">
+<h3>src.project_name.training.substractten<a class="headerlink" href="#src-project-name-training-substractten" title="Permalink to this headline">¶</a></h3>
+<p>This module provides functionalities to preprocess ten</p>
+<dl class="class">
+<dt id="src.project_name.preprocess.subtractten.SubtractTen">
+<em class="property">class </em><code class="sig-prename descclassname">src.project_name.preprocess.subtractten.</code><code class="sig-name descname">SubtractTen</code><span class="sig-paren">(</span><em class="sig-param">config: src.utils.config.Config</em><span class="sig-paren">)</span><a class="headerlink" href="#src.project_name.preprocess.subtractten.SubtractTen" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class subtracts ten to value</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="src-utils">
+<h2>src.utils<a class="headerlink" href="#src-utils" title="Permalink to this headline">¶</a></h2>
+<p>This package contains helper modules to develop, run and maintain the the packages of the project.</p>
+<span class="target" id="module-src.utils.color_logger"></span><div class="section" id="src-utils-color-logger">
+<h3>src.utils.color_logger<a class="headerlink" href="#src-utils-color-logger" title="Permalink to this headline">¶</a></h3>
+<p>This module provides some helping functionality for convenient and comfortable logging.</p>
+<dl class="class">
+<dt id="src.utils.color_logger.ColorHandler">
+<em class="property">class </em><code class="sig-prename descclassname">src.utils.color_logger.</code><code class="sig-name descname">ColorHandler</code><span class="sig-paren">(</span><em class="sig-param">stream=None</em>, <em class="sig-param">colors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.color_logger.ColorHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>A color log handler.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">colors</span></code> parameter is optional, and you can use any ANSI color.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Black</p></li>
+<li><p>Red</p></li>
+<li><p>Green</p></li>
+<li><p>Yellow</p></li>
+<li><p>Blue</p></li>
+<li><p>Magenta</p></li>
+<li><p>Cyan</p></li>
+<li><p>White</p></li>
+</ul>
+</div></blockquote>
+<p>The default colors are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>debug: magenta</p></li>
+<li><p>info: cyan</p></li>
+<li><p>warning: yellow</p></li>
+<li><p>error: red</p></li>
+<li><p>critical: red</p></li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="src.utils.color_logger.ColorHandler.format">
+<code class="sig-name descname">format</code><span class="sig-paren">(</span><em class="sig-param">record: str</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#src.utils.color_logger.ColorHandler.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>The handler formatter.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>record: The record to format.</p>
+</dd>
+<dt>Returns:</dt><dd><p>The record formatted as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-src.utils.config"></span><div class="section" id="src-utils-config">
+<h3>src.utils.config<a class="headerlink" href="#src-utils-config" title="Permalink to this headline">¶</a></h3>
+<p>This module manages the configuration.</p>
+<dl class="class">
+<dt id="src.utils.config.Config">
+<em class="property">class </em><code class="sig-prename descclassname">src.utils.config.</code><code class="sig-name descname">Config</code><span class="sig-paren">(</span><em class="sig-param">file_name: str</em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>config manager</p>
+<dl class="method">
+<dt id="src.utils.config.Config.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.config.Config.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the config for the passed key</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span class="target" id="module-src.utils.constants"></span><div class="section" id="src-utils-constants">
+<h3>src.utils.constants<a class="headerlink" href="#src-utils-constants" title="Permalink to this headline">¶</a></h3>
+<p>This module contains constant python values to be called throughout the model execution.</p>
+</div>
+<span class="target" id="module-src.utils.helper_functions"></span><div class="section" id="src-utils-helper-functions">
+<h3>src.utils.helper_functions<a class="headerlink" href="#src-utils-helper-functions" title="Permalink to this headline">¶</a></h3>
+<p>Module for helper functions that are sued in various modules of this project.</p>
+<dl class="function">
+<dt id="src.utils.helper_functions.weeks_until_next_event">
+<code class="sig-prename descclassname">src.utils.helper_functions.</code><code class="sig-name descname">weeks_until_next_event</code><span class="sig-paren">(</span><em class="sig-param">x: pandas._libs.tslibs.timestamps.Timestamp</em>, <em class="sig-param">date_col: str</em>, <em class="sig-param">event_df: pandas.core.frame.DataFrame</em>, <em class="sig-param">upper_cutoff: Optional[int] = None</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#src.utils.helper_functions.weeks_until_next_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate weeks until next occurence of an event in the event_df dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Timestamp for which we want to check the number of weeks until the next event in the event_df</p></li>
+<li><p><strong>date_col</strong> – Name of date-column in event_df</p></li>
+<li><p><strong>event_df</strong> – Dataframe that contains all dates on which the EVENT occurs</p></li>
+<li><p><strong>upper_cutoff</strong> – Upper cutoff that we want to apply to the number of weeks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of weeks until the next occurence of EVENT.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/kdbcg_logo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Documentation</a><ul>
+<li><a class="reference internal" href="#src-project-name-pipeline">src.project_name.pipeline</a><ul>
+<li><a class="reference internal" href="#src-project-name-pipeline-abstractpipelineobject">src.project_name.pipeline.abstractpipelineobject</a></li>
+<li><a class="reference internal" href="#src-project-name-pipeline-pipeline">src.project_name.pipeline.pipeline</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src-project-name-preparation">src.project_name.preparation</a><ul>
+<li><a class="reference internal" href="#src-project-name-preparation-dataloader">src.project_name.preparation.dataloader</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src-project-name-training">src.project_name.training</a><ul>
+<li><a class="reference internal" href="#src-project-name-training-trainingpipe">src.project_name.training.trainingpipe</a></li>
+<li><a class="reference internal" href="#src-project-name-training-addfive">src.project_name.training.addfive</a></li>
+<li><a class="reference internal" href="#src-project-name-training-addten">src.project_name.training.addten</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src-project-name-preprocess">src.project_name.preprocess</a><ul>
+<li><a class="reference internal" href="#src-project-name-preprocess-trainingpipe">src.project_name.preprocess.trainingpipe</a></li>
+<li><a class="reference internal" href="#src-project-name-training-substractfive">src.project_name.training.substractfive</a></li>
+<li><a class="reference internal" href="#src-project-name-training-substractten">src.project_name.training.substractten</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#src-utils">src.utils</a><ul>
+<li><a class="reference internal" href="#src-utils-color-logger">src.utils.color_logger</a></li>
+<li><a class="reference internal" href="#src-utils-config">src.utils.config</a></li>
+<li><a class="reference internal" href="#src-utils-constants">src.utils.constants</a></li>
+<li><a class="reference internal" href="#src-utils-helper-functions">src.utils.helper_functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Demand Forecasting documentation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Demand Forecasting documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arçelik Demand Forecasting 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, KocDigital and BCG team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

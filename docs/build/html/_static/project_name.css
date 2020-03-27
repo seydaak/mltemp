@@ -1,0 +1,49 @@
+
+
+div.sphinxsidebar a {
+    color: #f2f2f2;
+}
+
+div.sphinxsidebar {
+    background-color: #575757;
+}
+
+div.related {
+    background-image: url("project_name/navbar_top_background.png");
+}
+
+div.bodywrapper {
+    background-color: #f2f2f2;
+}
+
+div.documentwrapper {
+    background-color: #f2f2f2;
+}
+
+th, dl.field-list > dt {
+    background-color: #f2f2f2;
+    color: #575757;
+}
+
+div.body h1,
+div.body h2,
+div.body h3,
+div.body h4,
+div.body h5,
+div.body h6 {
+    background-color: #f2f2f2;
+    color: #ed4422;
+}
+
+div.footer {
+    color: #ffffff;
+    background-color: #3e3839;
+}
+
+div.sphinxsidebar ul {
+    margin: 10px 20px;
+    padding: 0;
+    color: #f8f8f8;
+}
+
+ 
