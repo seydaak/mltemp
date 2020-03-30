@@ -1,3 +1,4 @@
+import sys
 import logging
 from logging.config import dictConfig
 
@@ -20,7 +21,9 @@ def main() -> None:
         sys.exit(1)
 
     dictConfig(config.get("logging"))
-
+    log = logging.getLogger(__name__)
+    log.info("Started")
+    
     # Initialize Data Loader
     dl = dal.DataLoader(config)
 
