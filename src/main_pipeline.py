@@ -1,4 +1,6 @@
-import sys
+import logging
+from logging.config import dictConfig
+
 from src.utils.config import Config
 import src.project_name.preparation.dataloader as dal
 import src.project_name.training.trainingpipe as smp
@@ -16,6 +18,8 @@ def main() -> None:
     except FileNotFoundError:
         print("configuration file: %s not found" % config, file=sys.stderr)
         sys.exit(1)
+
+    dictConfig(config.get("logging"))
 
     # Initialize Data Loader
     dl = dal.DataLoader(config)
