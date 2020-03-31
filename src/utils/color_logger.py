@@ -6,10 +6,12 @@ src.utils.color_logger
 This module provides some helping functionality for convenient and comfortable logging.
 """
 
-
 import logging
-
 import click
+import sys
+from logging.config import dictConfig
+
+from src.utils.config import Config
 
 
 class ColorHandler(logging.StreamHandler):
@@ -45,6 +47,7 @@ class ColorHandler(logging.StreamHandler):
             "info": colors.get("info", "cyan"),
             "debug": colors.get("debug", "magenta"),
         }
+        self.config = "config_test.yml"
 
     def _get_color(self, level):
         if level >= logging.CRITICAL:
@@ -60,6 +63,14 @@ class ColorHandler(logging.StreamHandler):
 
         return None  # pragma: no cover
 
+    def get_config(self):
+        try:
+            config = Config(self.config)
+        except FileNotFoundError:
+            print("configuration file: %s not found" % config, file=sys.stderr)
+            sys.exit(1)
+        return config
+
     def format(self, record: str) -> str:
         """The handler formatter.
 
@@ -70,6 +81,7 @@ class ColorHandler(logging.StreamHandler):
             The record formatted as a string.
 
         """
+
         text = logging.StreamHandler.format(self, record)
         color = self._get_color(record.levelno)
         return click.style(text, color)

@@ -10,11 +10,14 @@ This module provides the abstract implementation for the pipeline objects that m
 import abc
 import pandas as pd
 import logging
+from logging.config import dictConfig
+
 import src.utils.color_logger as color_logger
 from src.utils.config import Config
 
+dictConfig(color_logger.ColorHandler().get_config().get("logging"))
 log = logging.getLogger(__name__)
-log.addHandler(color_logger.ColorHandler())
+# log.addHandler(color_logger.ColorHandler())
 
 
 class PipelineObject:
