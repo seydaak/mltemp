@@ -1,0 +1,44 @@
+[2020-12-28 14:09:53,054][INFO] Started
+[2020-12-28 14:09:53,069][INFO] Starting TrainingPipe with input of shape (1, 2)
+[2020-12-28 14:09:53,069][INFO] Starting Pipeline with input of shape (1, 2)
+[2020-12-28 14:09:53,069][INFO] Starting AddFive with input of shape (1, 2)
+[2020-12-28 14:09:53,125][INFO] NumExpr defaulting to 4 threads.
+[2020-12-28 14:09:53,131][INFO] 5 added!
+[2020-12-28 14:09:53,132][INFO] Finished AddFive with output of shape (1, 2)
+[2020-12-28 14:09:53,132][INFO] Starting AddTen with input of shape (1, 2)
+[2020-12-28 14:09:53,133][INFO] 10 added!
+[2020-12-28 14:09:53,133][INFO] Finished AddTen with output of shape (1, 2)
+[2020-12-28 14:09:53,133][INFO] Finished Pipeline with output of shape (1, 2)
+[2020-12-28 14:09:53,134][INFO] Finished TrainingPipe with output of shape (1, 2)
+[2020-12-28 14:09:53,134][INFO] Starting PreprocessPipe with input of shape (1, 2)
+[2020-12-28 14:09:53,134][INFO] Starting Pipeline with input of shape (1, 2)
+[2020-12-28 14:09:53,135][INFO] Starting SubtractFive with input of shape (1, 2)
+[2020-12-28 14:09:53,136][INFO] 5 subtracted!
+[2020-12-28 14:09:53,136][INFO] Finished SubtractFive with output of shape (1, 2)
+[2020-12-28 14:09:53,136][INFO] Starting SubtractTen with input of shape (1, 2)
+[2020-12-28 14:09:53,137][INFO] 10 subtracted!
+[2020-12-28 14:09:53,138][INFO] Finished SubtractTen with output of shape (1, 2)
+[2020-12-28 14:09:53,138][INFO] Finished Pipeline with output of shape (1, 2)
+[2020-12-28 14:09:53,138][INFO] Finished PreprocessPipe with output of shape (1, 2)
+[2020-12-28 16:13:20,834][INFO] Started
+[2020-12-28 16:13:20,844][INFO] Starting TrainingPipe with input of shape (1, 2)
+[2020-12-28 16:13:20,845][INFO] Starting Pipeline with input of shape (1, 2)
+[2020-12-28 16:13:20,845][INFO] Starting AddFive with input of shape (1, 2)
+[2020-12-28 16:13:20,895][INFO] NumExpr defaulting to 4 threads.
+[2020-12-28 16:13:20,901][INFO] 5 added!
+[2020-12-28 16:13:20,901][INFO] Finished AddFive with output of shape (1, 2)
+[2020-12-28 16:13:20,902][INFO] Starting AddTen with input of shape (1, 2)
+[2020-12-28 16:13:20,903][INFO] 10 added!
+[2020-12-28 16:13:20,903][INFO] Finished AddTen with output of shape (1, 2)
+[2020-12-28 16:13:20,904][INFO] Finished Pipeline with output of shape (1, 2)
+[2020-12-28 16:13:20,904][INFO] Finished TrainingPipe with output of shape (1, 2)
+[2020-12-28 16:13:20,904][INFO] Starting PreprocessPipe with input of shape (1, 2)
+[2020-12-28 16:13:20,905][INFO] Starting Pipeline with input of shape (1, 2)
+[2020-12-28 16:13:20,905][INFO] Starting SubtractFive with input of shape (1, 2)
+[2020-12-28 16:13:20,907][INFO] 5 subtracted!
+[2020-12-28 16:13:20,907][INFO] Finished SubtractFive with output of shape (1, 2)
+[2020-12-28 16:13:20,908][INFO] Starting SubtractTen with input of shape (1, 2)
+[2020-12-28 16:13:20,909][INFO] 10 subtracted!
+[2020-12-28 16:13:20,909][INFO] Finished SubtractTen with output of shape (1, 2)
+[2020-12-28 16:13:20,910][INFO] Finished Pipeline with output of shape (1, 2)
+[2020-12-28 16:13:20,910][INFO] Finished PreprocessPipe with output of shape (1, 2)
