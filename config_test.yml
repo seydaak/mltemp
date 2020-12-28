@@ -1,5 +1,5 @@
 data:
-  folder_path: "C:/Users/02485083/ML_Template/"
+  folder_path: "C:/Users/02483904/Desktop/ML template/ML_Template/"
   file_name: "dataset.csv"
   save_name: "saved_dataset.csv"
   type: "csv"

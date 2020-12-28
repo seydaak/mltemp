@@ -18,9 +18,9 @@ sys.setrecursionlimit(1500)
 
 # -- Project information -----------------------------------------------------
 
-project = 'Arçelik Demand Forecasting'
-copyright = '2019, KocDigital and BCG team'
-author = 'KocDigital and BCG team'
+project = 'Project Name'
+copyright = '2020, KocDigital'
+author = 'KocDigital'
 
 # The full version, including alpha/beta/rc tags
 release = '0.0.1'

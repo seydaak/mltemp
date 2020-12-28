@@ -20,7 +20,7 @@ def main() -> None:
         print("configuration file: %s not found" % config, file=sys.stderr)
         sys.exit(1)
 
-    # dictConfig(config.get("logging"))
+    # dictConfig(config.get("logging"))f
     log = logging.getLogger(__name__)
     log.info("Started")
     

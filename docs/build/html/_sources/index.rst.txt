@@ -1,6 +1,6 @@
-.. Arcelic Demand Forecasting documentation master file
+.. Project documentation master file
 
-Demand Forecasting documentation
+Project documentation
 ================================
 
 .. toctree::

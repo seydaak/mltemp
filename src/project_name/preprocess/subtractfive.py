@@ -32,6 +32,7 @@ class SubtractFive(apo.PipelineObject):
         :return: A dataframe that has been subtracted by this pipeline object
         """
         data["value"] = data["value"] - 5
+        data["value"] = data["value"] - 3
         log.info("5 subtracted!")
 
         return data
